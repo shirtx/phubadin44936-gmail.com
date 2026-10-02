@@ -1,0 +1,707 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+
+<meta name="viewport"
+      content="width=device-width,
+      initial-scale=1.0,
+      maximum-scale=1.0,
+      user-scalable=no">
+
+<title>SHIRTX</title>
+
+<style>
+
+*{
+    box-sizing:border-box;
+    -webkit-tap-highlight-color:transparent;
+}
+
+html,
+body{
+    margin:0;
+    padding:0;
+    width:100%;
+    min-height:100%;
+    background:#05080a;
+    color:#fff;
+    font-family:Arial,Helvetica,sans-serif;
+}
+
+body{
+    display:flex;
+    justify-content:center;
+    overflow-x:hidden;
+}
+
+/* พื้นที่ทั้งหมด */
+.page{
+    width:100%;
+    max-width:470px;
+    min-height:100vh;
+
+    /* ตำแหน่งพาแนว */
+    padding:175px 0 40px;
+}
+
+/* กล่องหลัก */
+.panel{
+    width:100%;
+    background:#101419;
+
+    border:1px solid #252c32;
+    border-radius:24px 24px 0 0;
+
+    padding:28px 9px 35px;
+
+    box-shadow:
+        0 10px 30px rgba(0,0,0,.35);
+}
+
+/* รูปโปรไฟล์ */
+.profile{
+    width:94px;
+    height:94px;
+
+    margin:0 auto 12px;
+
+    border-radius:22px;
+
+    overflow:hidden;
+
+    background:#f1f1f1;
+
+    border:2px solid #5a6065;
+
+    display:flex;
+    align-items:center;
+    justify-content:center;
+}
+
+.profile img{
+    width:100%;
+    height:100%;
+    object-fit:cover;
+    display:block;
+}
+
+/* SHIRTX */
+.title{
+    text-align:center;
+
+    font-size:30px;
+    line-height:1;
+
+    font-weight:800;
+
+    margin-bottom:10px;
+}
+
+/* ปุ่มด้านบน */
+.top-buttons{
+    width:100%;
+
+    display:grid;
+    grid-template-columns:1fr 1fr;
+
+    gap:8px;
+
+    background:#05090b;
+
+    padding:4px;
+
+    margin-bottom:14px;
+}
+
+.top-btn{
+    height:55px;
+
+    border-radius:15px;
+
+    border:1px solid #2b3238;
+
+    background:#101519;
+
+    color:#fff;
+
+    font-size:18px;
+    font-weight:700;
+
+    cursor:pointer;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.02),
+        0 3px 0 #050708;
+
+    transition:transform .1s ease;
+}
+
+.top-btn:active{
+    transform:scale(.97);
+}
+
+/* รายการฟังก์ชัน */
+.function-list{
+    display:flex;
+    flex-direction:column;
+
+    gap:10px;
+}
+
+.function-card{
+    width:100%;
+    height:70px;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    padding:0 17px;
+
+    background:#191e22;
+
+    border:1px solid #282f34;
+
+    border-radius:16px;
+
+    box-shadow:
+        inset 0 1px 0 rgba(255,255,255,.015),
+        0 2px 4px rgba(0,0,0,.2);
+}
+
+.function-name{
+    font-size:16px;
+    font-weight:700;
+}
+
+/* SWITCH */
+.switch{
+    position:relative;
+
+    width:55px;
+    height:34px;
+
+    flex-shrink:0;
+}
+
+.switch input{
+    display:none;
+}
+
+.slider{
+    position:absolute;
+
+    left:0;
+    top:0;
+    right:0;
+    bottom:0;
+
+    background:#303740;
+
+    border-radius:30px;
+
+    cursor:pointer;
+
+    transition:.2s;
+}
+
+.slider:before{
+    content:"";
+
+    position:absolute;
+
+    width:24px;
+    height:24px;
+
+    left:5px;
+    top:5px;
+
+    border-radius:50%;
+
+    background:#fff;
+
+    transition:.2s;
+
+    box-shadow:
+        0 1px 3px rgba(0,0,0,.4);
+}
+
+.switch input:checked + .slider{
+    background:#1685ff;
+}
+
+.switch input:checked + .slider:before{
+    transform:translateX(21px);
+}
+
+/* SENSIBILIDADE */
+.section-title{
+    margin:20px 0 10px;
+
+    font-size:14px;
+
+    color:#aeb4ba;
+
+    font-weight:500;
+
+    letter-spacing:.2px;
+}
+
+/* กล่องความไว */
+.sensitivity{
+    width:100%;
+
+    background:#191e22;
+
+    border:1px solid #282f34;
+
+    border-radius:16px;
+
+    padding:18px 18px 20px;
+}
+
+.sensitivity-head{
+    width:100%;
+
+    display:flex;
+    align-items:center;
+    justify-content:space-between;
+
+    margin-bottom:17px;
+}
+
+.sensitivity-name{
+    font-size:16px;
+}
+
+.value{
+    font-size:18px;
+    font-weight:800;
+}
+
+/* RANGE */
+.range-wrap{
+    width:100%;
+}
+
+input[type="range"]{
+    appearance:none;
+    -webkit-appearance:none;
+
+    width:100%;
+    height:8px;
+
+    border-radius:10px;
+
+    background:
+        linear-gradient(
+            to right,
+            #1685ff 0%,
+            #1685ff 50%,
+            #f0f0f0 50%,
+            #f0f0f0 100%
+        );
+
+    outline:none;
+}
+
+input[type="range"]::-webkit-slider-thumb{
+    appearance:none;
+    -webkit-appearance:none;
+
+    width:20px;
+    height:20px;
+
+    border-radius:50%;
+
+    background:#1685ff;
+
+    border:none;
+}
+
+input[type="range"]::-moz-range-thumb{
+    width:20px;
+    height:20px;
+
+    border-radius:50%;
+
+    background:#1685ff;
+
+    border:none;
+}
+
+/* TOAST */
+.toast{
+    position:fixed;
+
+    left:50%;
+    bottom:25px;
+
+    transform:
+        translateX(-50%)
+        translateY(20px);
+
+    background:#191e22;
+
+    border:1px solid #343b41;
+
+    border-radius:12px;
+
+    padding:11px 17px;
+
+    font-size:14px;
+
+    opacity:0;
+
+    pointer-events:none;
+
+    transition:.25s;
+
+    z-index:999;
+
+    box-shadow:
+        0 8px 30px rgba(0,0,0,.45);
+}
+
+.toast.show{
+    opacity:1;
+
+    transform:
+        translateX(-50%)
+        translateY(0);
+}
+
+/* มือถือจอเล็ก */
+@media(max-width:470px){
+
+    .page{
+        width:100%;
+        max-width:470px;
+
+        padding-left:0;
+        padding-right:0;
+    }
+
+    .panel{
+        width:100%;
+    }
+
+}
+
+/* จอใหญ่มาก */
+@media(min-width:471px){
+
+    .page{
+        padding-top:175px;
+    }
+
+}
+
+</style>
+</head>
+
+
+<body>
+
+<div class="page">
+
+    <main class="panel">
+
+        <!-- รูปโปรไฟล์ -->
+        <div class="profile">
+
+            <!-- เปลี่ยน profile.jpg เป็นชื่อรูปของคุณ -->
+            <img
+                src="profile.jpg"
+                alt="SHIRTX"
+            >
+
+        </div>
+
+
+        <!-- ชื่อ -->
+        <div class="title">
+            SHIRTX
+        </div>
+
+
+        <!-- ปุ่มด้านบน -->
+        <div class="top-buttons">
+
+            <button
+                class="top-btn"
+                type="button"
+                onclick="showToast('Function')"
+            >
+                Function
+            </button>
+
+
+            <button
+                class="top-btn"
+                type="button"
+                onclick="showToast('Select a game')"
+            >
+                Select a game
+            </button>
+
+        </div>
+
+
+        <!-- ฟังก์ชัน -->
+        <div class="function-list">
+
+
+            <!-- Precisão -->
+            <div class="function-card">
+
+                <span class="function-name">
+                    Precisão
+                </span>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        autocomplete="off"
+                        onchange="toggleFunction(this,'Precisão')"
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- Controle de Recuo -->
+            <div class="function-card">
+
+                <span class="function-name">
+                    Controle de Recuo
+                </span>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        autocomplete="off"
+                        onchange="toggleFunction(this,'Controle de Recuo')"
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- Otimizar Touch -->
+            <div class="function-card">
+
+                <span class="function-name">
+                    Otimizar Touch
+                </span>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        autocomplete="off"
+                        onchange="toggleFunction(this,'Otimizar Touch')"
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+
+            <!-- Modo FPS -->
+            <div class="function-card">
+
+                <span class="function-name">
+                    Modo FPS
+                </span>
+
+                <label class="switch">
+
+                    <input
+                        type="checkbox"
+                        autocomplete="off"
+                        onchange="toggleFunction(this,'Modo FPS')"
+                    >
+
+                    <span class="slider"></span>
+
+                </label>
+
+            </div>
+
+        </div>
+
+
+        <!-- หัวข้อ -->
+        <div class="section-title">
+            SENSIBILIDADE
+        </div>
+
+
+        <!-- ความไว -->
+        <div class="sensitivity">
+
+            <div class="sensitivity-head">
+
+                <span class="sensitivity-name">
+                    Precisão
+                </span>
+
+                <span
+                    class="value"
+                    id="precisionValue"
+                >
+                    50
+                </span>
+
+            </div>
+
+
+            <div class="range-wrap">
+
+                <input
+                    id="precisionRange"
+                    type="range"
+                    min="0"
+                    max="100"
+                    value="50"
+                    autocomplete="off"
+                    oninput="updateRange(this,'precisionValue')"
+                >
+
+            </div>
+
+        </div>
+
+    </main>
+
+</div>
+
+
+<!-- แจ้งเตือน -->
+<div
+    class="toast"
+    id="toast"
+>
+</div>
+
+
+<script>
+
+/* แจ้งเตือน */
+function showToast(text){
+
+    const toast =
+        document.getElementById("toast");
+
+    toast.textContent = text;
+
+    toast.classList.add("show");
+
+    setTimeout(function(){
+
+        toast.classList.remove("show");
+
+    },1500);
+
+}
+
+
+/* เปิด/ปิดฟังก์ชัน */
+function toggleFunction(element,name){
+
+    if(element.checked){
+
+        showToast(name + " ON");
+
+    }else{
+
+        showToast(name + " OFF");
+
+    }
+
+}
+
+
+/* ปรับค่า Sensibilidade */
+function updateRange(range,valueId){
+
+    const value =
+        Number(range.value);
+
+    const min =
+        Number(range.min);
+
+    const max =
+        Number(range.max);
+
+    const percent =
+        ((value - min) /
+        (max - min)) * 100;
+
+
+    document.getElementById(valueId)
+        .textContent = value;
+
+
+    range.style.background =
+        "linear-gradient(" +
+        "to right," +
+        "#1685ff 0%," +
+        "#1685ff " + percent + "%," +
+        "#f0f0f0 " + percent + "%," +
+        "#f0f0f0 100%" +
+        ")";
+
+}
+
+
+/*
+   บังคับค่าเริ่มต้น
+   ให้เหมือนต้นแบบ:
+   - ทุกสวิตช์ OFF
+   - Precisão = 50
+*/
+window.addEventListener("load",function(){
+
+    const switches =
+        document.querySelectorAll(
+            '.switch input'
+        );
+
+    switches.forEach(function(item){
+
+        item.checked = false;
+
+    });
+
+
+    const range =
+        document.getElementById(
+            "precisionRange"
+        );
+
+    range.value = 50;
+
+    updateRange(
+        range,
+        "precisionValue"
+    );
+
+});
+
+</script>
+
+</body>
+                                           </html>
